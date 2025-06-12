@@ -27,11 +27,6 @@ hwdec=no          # CPU decoding
 profile=fast      # Maximum performance
 ```
 
-**Minimum Requirements:**
-- Any CPU (even single core)
-- 2GB RAM
-- No GPU needed
-
 ### 2. Low Quality Hardware (HW) Profile
 Best for: Basic laptops, older computers with GPU
 ```properties
@@ -39,11 +34,6 @@ vo=gpu            # GPU rendering
 hwdec=auto-safe   # Hardware decoding
 profile=fast      # Performance focus
 ```
-
-**Minimum Requirements:**
-- Dual-core CPU
-- 2GB RAM
-- Basic GPU (Intel HD 4000+)
 
 ### 3. High Quality Profile
 Best for: Modern computers, quality-focused playback
