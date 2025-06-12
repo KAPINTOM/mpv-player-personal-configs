@@ -1,77 +1,153 @@
-# MPV Player Configuration Repository 🎥
+# MPV Player Configuration Profiles
 
-Welcome to the **MPV Player Configuration Repository**! This repository contains a collection of configuration files (`mpv.conf`) and input bindings (`input.conf`) for the MPV media player, organized into four distinct folders based on different performance and quality needs. Whether you're aiming for the highest video quality, balanced performance, or low-resource usage, this repository has the right configuration for you.
+A collection of optimized MPV player configurations for different hardware capabilities and use cases.
 
-## Folder Structure 📂
+## Quick Start Guide
 
-The repository is organized into four folders, each containing a specific configuration tailored to different use cases:
+1. Choose your profile based on your hardware:
+   - Ancient/Low-end PC → Low Quality SW
+   - Basic GPU → Low Quality HW
+   - Modern GPU → High Quality
+   - Gaming/High-end PC → High Quality + Interpolation
 
-### 1. **High Quality with Interpolation** 🌟
-   - **Folder**: `high-quality-with-interpolation`
-   - **Description**: This configuration is designed for users who want the **best visual experience** with smooth video playback. It includes settings for **interpolation** to make motion smoother, along with high-quality rendering and debanding.
-   - **Key Features**:
-     - `vo=gpu-next` for advanced GPU rendering.
-     - `hwdec=auto-safe` for hardware decoding.
-     - **Interpolation** enabled for smoother motion (`interpolation=yes`, `tscale=robidouxsharp`, `video-sync=display-resample`).
-     - **Debanding** to reduce visual artifacts.
-     - Saves playback position and starts in fullscreen mode.
+2. Installation:
+   ```batch
+   # Windows
+   mkdir %APPDATA%\mpv
+   copy mpv.conf %APPDATA%\mpv\
+   copy input.conf %APPDATA%\mpv\
+   ```
 
-### 2. **High Quality without Interpolation** ⚖️
-   - **Folder**: `high-quality-without-interpolation`
-   - **Description**: This configuration offers **high-quality video playback** but **disables interpolation** for better performance. It's ideal for users who want great visuals without the extra processing overhead of interpolation.
-   - **Key Features**:
-     - `vo=gpu-next` for advanced GPU rendering.
-     - `hwdec=auto-safe` for hardware decoding.
-     - **Interpolation disabled** (commented out in the config).
-     - **Debanding** to reduce visual artifacts.
-     - Saves playback position and starts in fullscreen mode.
+## Configuration Profiles
 
-### 3. **Low Quality (Hardware Decoding)** 💻
-   - **Folder**: `low-quality-hw`
-   - **Description**: This configuration is optimized for **performance** while still using **hardware decoding**. It's perfect for users with mid-range hardware who want a balance between quality and speed.
-   - **Key Features**:
-     - `vo=gpu` for standard GPU rendering.
-     - `hwdec=auto-safe` for hardware decoding.
-     - `profile=fast` for optimized performance.
-     - **Audio-video synchronization** enabled (`video-sync=audio`).
-     - Saves playback position and starts in fullscreen mode.
+### 1. Low Quality Software (SW) Profile
+Best for: Very old computers, compatibility testing
+```properties
+hwdec=no          # CPU decoding
+profile=fast      # Maximum performance
+```
 
-### 4. **Low Quality (Software Decoding)** 🐢
-   - **Folder**: `low-quality-sw`
-   - **Description**: This configuration is designed for **low-end systems** or situations where hardware decoding is not available. It relies on **software decoding** and is optimized for minimal resource usage.
-   - **Key Features**:
-     - `hwdec=no` to disable hardware decoding.
-     - `profile=fast` for optimal CPU performance.
-     - **Audio-video synchronization** enabled (`video-sync=audio`).
-     - Saves playback position and starts in fullscreen mode.
+**Minimum Requirements:**
+- Any CPU (even single core)
+- 2GB RAM
+- No GPU needed
 
-### 5. **Custom Sharpness Controls** 🔍
-   - **File**: `input.conf`
-   - **Description**: This file provides **keyboard shortcuts** to adjust video sharpness. It's compatible with configurations that use `vo=gpu` (not `gpu-next`).
-   - **Key Features**:
-     - **Ctrl+1**: Decrease sharpness.
-     - **Ctrl+2**: Increase sharpness.
+### 2. Low Quality Hardware (HW) Profile
+Best for: Basic laptops, older computers with GPU
+```properties
+vo=gpu            # GPU rendering
+hwdec=auto-safe   # Hardware decoding
+profile=fast      # Performance focus
+```
 
-## How to Use These Configurations? 🛠️
+**Minimum Requirements:**
+- Dual-core CPU
+- 2GB RAM
+- Basic GPU (Intel HD 4000+)
 
-1. **Clone the repository** or download the configuration files.
-2. Navigate to the folder that matches your desired configuration (e.g., `high-quality-with-interpolation`).
-3. Copy the `mpv.conf` and `input.conf` files to your MPV configuration directory:
-   - **Linux**: `~/.config/mpv/`
-   - **Windows**: `\mpv\`
-   - **macOS**: `~/.config/mpv/`
-4. Restart MPV to apply the new settings.
+### 3. High Quality Profile
+Best for: Modern computers, quality-focused playback
+```properties
+vo=gpu-next       # Modern renderer
+hwdec=auto-safe   # Hardware decoding
+profile=gpu-hq    # High quality
+scale=ewa_lanczos4sharpest
+correct-downscaling=yes
+```
 
-## Customization and Contributions 🤝
+### 4. High Quality + Interpolation
+Best for: High-end systems, smooth motion
+```properties
+vo=gpu-next
+interpolation=yes
+tscale=oversample
+video-sync=display-resample
+```
 
-Feel free to customize these configurations to suit your needs! If you have improvements or additional configurations, contributions are welcome. Just fork the repository, make your changes, and submit a pull request.
+## Advanced Features Explained
 
-## Why Use These Configurations? 🎯
+### 1. Scaling Quality Levels
+From lowest to highest quality:
 
-- **High Quality with Interpolation**: Perfect for users who want the **smoothest and most visually stunning** playback experience.
-- **High Quality without Interpolation**: Ideal for users who want **great visuals** but prefer **better performance**.
-- **Low Quality (Hardware Decoding)**: Great for **mid-range systems** that need a balance between quality and speed.
-- **Low Quality (Software Decoding)**: Designed for **low-end systems** or situations where hardware decoding is not available.
-- **Custom Sharpness Controls**: Gives you **fine-tuned control** over video sharpness.
+1. **Basic (Low-end):**
+   ```properties
+   scale=bilinear
+   cscale=bilinear
+   ```
+   - Minimal GPU load
+   - Acceptable for SD content
 
-**Note**: These configurations are not officially affiliated with the MPV project. They are community-driven and designed to enhance your MPV experience.
+2. **Balanced (Mid-range):**
+   ```properties
+   scale=spline36
+   cscale=spline36
+   ```
+   - Good quality/performance ratio
+   - Recommended for 1080p
+
+3. **Maximum (High-end):**
+   ```properties
+   scale=ewa_lanczos4sharpest
+   cscale=ewa_lanczos4sharpest
+   correct-downscaling=yes
+   ```
+   - Best possible quality
+   - Heavy GPU load
+   - Great for 4K content
+
+### 2. Hardware Decoding Options
+
+1. **Software Decoding (`hwdec=no`):**
+   - Uses CPU only
+   - Maximum compatibility
+   - Highest CPU usage
+
+2. **Hardware Decoding (`hwdec=auto-safe`):**
+   - Automatic GPU selection
+   - Supports: H.264, H.265, VP9, AV1
+   - Lower CPU usage
+
+3. **Vulkan Decoding:**
+   ```properties
+   gpu-api=vulkan
+   hwdec=vulkan
+   ```
+   - Best performance on modern GPUs
+   - Requires Vulkan 1.1+ support
+
+### 3. Performance Impact Guide
+
+| Feature | GPU Load | CPU Load | Quality Impact |
+|---------|----------|----------|----------------|
+| Basic Scaling | 1-2% | Minimal | Low |
+| Lanczos Scaling | 5-10% | Low | High |
+| Interpolation | 15-30% | Medium | Very High |
+| HDR Processing | 5-15% | Low | High |
+
+## Troubleshooting
+
+### Common Issues & Solutions
+
+1. **High CPU Usage**
+   - Switch to hardware decoding
+   - Use a lighter scaling method
+   - Disable interpolation
+
+2. **Stuttering**
+   - Try different `vo` settings
+   - Disable interpolation
+   - Lower scaling quality
+
+3. **Quality Problems**
+   - Verify hardware decoding support
+   - Check GPU driver updates
+   - Adjust scaling settings
+
+## Performance Monitoring
+Press `I` while playing to show:
+- Frame timing
+- Hardware decode status
+- GPU/CPU load
+- Dropped frames
+
+Remember: Start with the profile matching your hardware, then adjust settings as needed.
