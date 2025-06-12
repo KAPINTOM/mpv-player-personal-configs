@@ -1,143 +1,76 @@
-# MPV Player Configuration Profiles
+# MPV Starter
 
-A collection of optimized MPV player configurations for different hardware capabilities and use cases.
+[English below]  
+[日本語は下記]  
+[简体中文如下]  
+[한국어는 아래에]  
+[Русский ниже]
 
-## Quick Start Guide
+## 🇪🇸 Lanzador gráfico para MPV
 
-1. Choose your profile based on your hardware:
-   - Ancient/Low-end PC → Low Quality SW
-   - Basic GPU → Low Quality HW
-   - Modern GPU → High Quality
-   - Gaming/High-end PC → High Quality + Interpolation
+**MPV Starter** es una interfaz gráfica para el reproductor [MPV](https://mpv.io/) que permite reproducir contenido multimedia de manera sencilla. 
 
-2. Installation:
-   ```batch
-   # Windows
-   mkdir %APPDATA%\mpv
-   copy mpv.conf %APPDATA%\mpv\
-   copy input.conf %APPDATA%\mpv\
-   ```
+### Características principales
+- **Selección de MPV:** Selecciona fácilmente el ejecutable de MPV
+- **Actualización de MPV:** Actualiza MPV usando el updater.bat incluido
+- **Carga de archivos:** Reproduce archivos locales o URLs de internet
+- **Parámetros personalizados:** Agrega y selecciona parámetros de MPV mediante casillas
+- **Historial:** Guarda automáticamente los últimos 100 enlaces reproducidos
+- **Marcadores:** Guarda y administra marcadores con título y enlace
+- **Soporte multiidioma:** 
+  - Español
+  - English
+  - 日本語
+  - 简体中文
+  - 한국어
+  - Português
+  - Français
+  - Italiano
+  - Русский
+  - Deutsch
+- **Interfaz moderna:** Diseño limpio con tema claro y botones modernos
+- **Configuración portable:** Todos los datos se guardan localmente junto al ejecutable
 
-## Configuration Profiles
+---
 
-### 1. Low Quality Software (SW) Profile
-Best for: Very old computers, compatibility testing
-```properties
-hwdec=no          # CPU decoding
-profile=fast      # Maximum performance
-```
+## 🇬🇧 MPV Graphical Launcher
 
-### 2. Low Quality Hardware (HW) Profile
-Best for: Basic laptops, older computers with GPU
-```properties
-vo=gpu            # GPU rendering
-hwdec=auto-safe   # Hardware decoding
-profile=fast      # Performance focus
-```
+**MPV Starter** is a graphical interface for the [MPV](https://mpv.io/) player that allows easy media playback.
 
-### 3. High Quality Profile
-Best for: Modern computers, quality-focused playback
-```properties
-vo=gpu-next       # Modern renderer
-hwdec=auto-safe   # Hardware decoding
-profile=gpu-hq    # High quality
-scale=ewa_lanczos4sharpest
-correct-downscaling=yes
-```
+### Main Features
+- **MPV Selection:** Easily select the MPV executable
+- **MPV Update:** Update MPV using the included updater.bat
+- **File Loading:** Play local files or internet URLs
+- **Custom Parameters:** Add and select MPV parameters via checkboxes
+- **History:** Automatically saves last 100 played links
+- **Bookmarks:** Save and manage bookmarks with title and link
+- **Multi-language Support:** 
+  - English
+  - Español
+  - 日本語
+  - 简体中文
+  - 한국어
+  - Português
+  - Français
+  - Italiano
+  - Русский
+  - Deutsch
+- **Modern Interface:** Clean design with light theme and modern buttons
+- **Portable Setup:** All data stored locally alongside the executable
 
-### 4. High Quality + Interpolation
-Best for: High-end systems, smooth motion
-```properties
-vo=gpu-next
-interpolation=yes
-tscale=oversample
-video-sync=display-resample
-```
+### Requirements
+- Windows OS
+- Python 3.x (if running from source)
+- MPV player installed
 
-## Advanced Features Explained
+### Files
+The application creates and manages these files:
+- `config.conf`: MPV path configuration
+- `params.conf`: Custom parameters
+- `history.json`: Recently played items
+- `bookmarks.json`: Saved bookmarks
+- `language.conf`: Language settings
 
-### 1. Scaling Quality Levels
-From lowest to highest quality:
-
-1. **Basic (Low-end):**
-   ```properties
-   scale=bilinear
-   cscale=bilinear
-   ```
-   - Minimal GPU load
-   - Acceptable for SD content
-
-2. **Balanced (Mid-range):**
-   ```properties
-   scale=spline36
-   cscale=spline36
-   ```
-   - Good quality/performance ratio
-   - Recommended for 1080p
-
-3. **Maximum (High-end):**
-   ```properties
-   scale=ewa_lanczos4sharpest
-   cscale=ewa_lanczos4sharpest
-   correct-downscaling=yes
-   ```
-   - Best possible quality
-   - Heavy GPU load
-   - Great for 4K content
-
-### 2. Hardware Decoding Options
-
-1. **Software Decoding (`hwdec=no`):**
-   - Uses CPU only
-   - Maximum compatibility
-   - Highest CPU usage
-
-2. **Hardware Decoding (`hwdec=auto-safe`):**
-   - Automatic GPU selection
-   - Supports: H.264, H.265, VP9, AV1
-   - Lower CPU usage
-
-3. **Vulkan Decoding:**
-   ```properties
-   gpu-api=vulkan
-   hwdec=vulkan
-   ```
-   - Best performance on modern GPUs
-   - Requires Vulkan 1.1+ support
-
-### 3. Performance Impact Guide
-
-| Feature | GPU Load | CPU Load | Quality Impact |
-|---------|----------|----------|----------------|
-| Basic Scaling | 1-2% | Minimal | Low |
-| Lanczos Scaling | 5-10% | Low | High |
-| Interpolation | 15-30% | Medium | Very High |
-| HDR Processing | 5-15% | Low | High |
-
-## Troubleshooting
-
-### Common Issues & Solutions
-
-1. **High CPU Usage**
-   - Switch to hardware decoding
-   - Use a lighter scaling method
-   - Disable interpolation
-
-2. **Stuttering**
-   - Try different `vo` settings
-   - Disable interpolation
-   - Lower scaling quality
-
-3. **Quality Problems**
-   - Verify hardware decoding support
-   - Check GPU driver updates
-   - Adjust scaling settings
-
-## Performance Monitoring
-Press `I` while playing to show:
-- Frame timing
-- Hardware decode status
-- GPU/CPU load
-- Dropped frames
-
-Remember: Start with the profile matching your hardware, then adjust settings as needed.
+### Author
+Developed by Kenneth Andrey Pinto Medina  
+GitHub: [KAPINTOM](https://github.com/KAPINTOM)
