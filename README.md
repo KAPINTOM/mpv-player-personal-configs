@@ -14,7 +14,7 @@ MPV uses plain text configuration files where:
 
 ## File-by-File Analysis
 
-### 1. **actual personal configuration.txt**
+### 1. **actual personal configuration**
 **Primary Use:** Current daily-driver configuration with moderate enhancements
 
 **Key Settings:**
@@ -31,7 +31,7 @@ MPV uses plain text configuration files where:
 - YouTube quality restriction saves bandwidth but reduces video quality
 - `sharpen=2` applies a global sharpening filter (can create artifacts)
 
-### 2. **high quality and interpolation using gpu.txt**
+### 2. **high quality and interpolation using gpu**
 **Primary Use:** Maximum visual quality with smooth motion interpolation
 
 **Key Features:**
@@ -50,7 +50,7 @@ MPV uses plain text configuration files where:
 - `gpu-next` may have compatibility issues with some hardware/drivers
 - Interpolation can create "soap opera effect" that some viewers dislike
 
-### 3. **High quality without interpolation using gpu.txt**
+### 3. **High quality without interpolation using gpu**
 **Primary Use:** Maximum visual quality without artificial smoothness
 
 **Key Differentiators:**
@@ -63,7 +63,7 @@ MPV uses plain text configuration files where:
 - Systems with less powerful GPUs
 - Content where interpolation artifacts would be noticeable (animation, film grain)
 
-### 4. **input.txt**
+### 4. **input**
 **Primary Use:** Keyboard shortcuts for adjusting sharpness dynamically
 
 **Important Context:**
@@ -76,7 +76,7 @@ MPV uses plain text configuration files where:
 - Increase gradually until artifacts appear, then back off slightly
 - Different content (anime vs live action) may need different settings
 
-### 5. **Low quality using gpu.txt**
+### 5. **Low quality using gpu**
 **Primary Use:** Maximum performance on older or low-power hardware
 
 **Key Settings:**
@@ -89,7 +89,7 @@ MPV uses plain text configuration files where:
 - Laptops on battery power (reduces energy consumption)
 - Background playback where quality isn't critical
 
-### 6. **Low quality using software.txt**
+### 6. **Low quality using software**
 **Primary Use:** Maximum compatibility when hardware acceleration fails
 
 **Critical Setting:**
@@ -133,13 +133,13 @@ MPV uses plain text configuration files where:
 ## Practical Recommendations for Novice Users
 
 ### Getting Started:
-1. Begin with **actual personal configuration.txt** as your base
-2. If videos play smoothly, try **High quality without interpolation using gpu.txt**
+1. Begin with **actual personal configuration** as your base
+2. If videos play smoothly, try **High quality without interpolation using gpu**
 3. Only enable interpolation if you have a powerful GPU and like the smooth effect
 
 ### Performance Troubleshooting:
-1. If videos stutter: Switch to **Low quality using gpu.txt**
-2. If videos won't play: Try **Low quality using software.txt** to identify GPU issues
+1. If videos stutter: Switch to **Low quality using gpu**
+2. If videos won't play: Try **Low quality using software** to identify GPU issues
 3. If software decoding works but is slow: Update your GPU drivers
 
 ### Quality vs Performance Balance:
